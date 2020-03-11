@@ -3,22 +3,11 @@ package ca.uqam.inf2120;
 /**
  * Jamo
  */
-public class Jamo {
+public abstract class Jamo {
 
-    private int value;
+    protected int value;
 
-    Jamo(int value) {
-        this.value = value;
-    }
-
-    public String getIPA() {
-        switch (this.value) {
-            case 1:
-                return "\\u006B";
-            default: 
-                return "\\uFFFD";
-        }
-    }
+    abstract public String getIPA();
 
     public String toString() {
         return String.format("%d", value);

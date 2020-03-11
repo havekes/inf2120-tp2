@@ -8,9 +8,29 @@ import java.util.Iterator;
 public class StringKorean implements Iterable<Hangul> {
 
     private String input;
+    private Hangul[] hanguls;
 
     StringKorean(String input) {
         this.input = input.trim();
+        parseInputToHanguls();
+    }
+
+    private void parseInputToHanguls() {
+        hanguls = new Hangul[input.length()];
+        for (int i = 0; i < input.length(); i++) {
+            hanguls[i] = new Hangul(input.charAt(i));
+        }
+    }
+
+    public void correction() {
+        var it = this.iterator();
+        var tempHangul = it.next();
+        while (it.hasNext()) {
+            var hangul1 = tempHangul;
+            var hangul2 = it.next();
+            hangul2.correctFirstConsonant(hangul1);
+            tempHangul = hangul2;
+        }
     }
 
     @Override
@@ -33,7 +53,7 @@ public class StringKorean implements Iterable<Hangul> {
 
         @Override
         public Hangul next() {
-            Hangul hangul = new Hangul(this.str.input.charAt(index));
+            var hangul = new Hangul(this.str.input.charAt(index));
             index++;
             return hangul;
         }

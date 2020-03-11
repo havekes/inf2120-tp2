@@ -7,8 +7,15 @@ public class Hangul {
 
     private Character codePoint;
 
+    private JamoFirstConsonant firstConsonant;
+    private JamoVowel vowel;
+    private JamoLastConsonant lastConsonant;
+
     Hangul(Character codePoint) {
         this.codePoint = codePoint;
+        firstConsonant = new JamoFirstConsonant(c());
+        vowel = new JamoVowel(v());
+        lastConsonant = new JamoLastConsonant(d()); 
     }
 
     private int uPrime() {
@@ -27,20 +34,25 @@ public class Hangul {
         return 1 + uPrime() / 588;
     }
 
-    public Jamo firstConsonant() {
-        return new Jamo(c());
+    public Jamo getFirstConsonant() {
+        return firstConsonant;
     }
 
-    public Jamo vowel() {
-        return new Jamo(v());
+    public void correctFirstConsonant(Hangul previousHangul) {
+        if (previousHangul.lastConsonant != null) {
+            previousHangul.lastConsonant.correctFromNext(this.firstConsonant);
+        }
     }
 
-    // might not always have last consonant
-    public Jamo lastConsonant() {
-        return new Jamo(d());
+    public Jamo getVowel() {
+        return vowel;
+    }
+
+    public Jamo getLastConsonant() {
+        return lastConsonant;
     }
 
     public String toString() {
-        return String.format("( %s, %s, %s )", firstConsonant(), vowel(), lastConsonant());
+        return String.format("( %s, %s, %s )", firstConsonant, vowel, lastConsonant);
     }
 }
