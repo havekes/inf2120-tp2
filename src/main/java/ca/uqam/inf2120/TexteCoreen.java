@@ -2,26 +2,25 @@ package ca.uqam.inf2120;
 
 public class TexteCoreen {
 
-    public TexteCoreen(String text) {
-        StringKorean stringKorean = new StringKorean(text);
-        for (final var hangul : stringKorean) {
-            System.out.println(hangul);
-        }
+    private final StringKorean stringKorean;
+
+    public TexteCoreen(String input) {
+        stringKorean = new StringKorean(input);
     }
 
     public int noConsonneInitiale(int position) {
-        return 0;
+        return stringKorean.getHangul(position).getFirstConsonant().getValue();
     }
 
     public int noVoyelle(int position) {
-        return 0;
+        return stringKorean.getHangul(position).getVowel().getValue();
     }
 
     public int noConsonneFinale(int position) {
-        return 0;
+        return stringKorean.getHangul(position).getVowel().getValue();
     }
 
     public String traduire() {
-        return "";
+        return stringKorean.getIPA();
     }
 }
