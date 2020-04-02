@@ -16,6 +16,7 @@ public class StringKorean {
      */
     StringKorean(String input) {
         hanguls = parseStringToHanguls(input.trim());
+        this.applyCorrections();
     }
 
     /**
@@ -45,7 +46,7 @@ public class StringKorean {
     /**
      * Effectuer les corrections phonetiques sur le jamos de fin et de debut des hanguls
      */
-    public void corrections() {
+    public void applyCorrections() {
         var it = hanguls.iterator();
         var tempHangul = it.next();
         
