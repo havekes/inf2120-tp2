@@ -17,7 +17,7 @@ public class TexteCoreen {
     }
 
     public int noConsonneFinale(int position) {
-        return stringKorean.getHangul(position).getVowel().getValue();
+        return stringKorean.getHangul(position).getLastConsonant().getValue();
     }
 
     public String traduire() {
